@@ -23,12 +23,16 @@ async function createUser(req, res){
         //push the data to memory object
         data.users.push(newUser);
 
-        //write to the file
-        await writeData(data);
 
-        res.redirect('/home');
+    //write to the file
+    await writeData(data);
+    res.status(201).json({ message: 'New user added', user: newUser });
 
     } catch (error) {
         return res.status(500).send(`Internal Server Error: ${error.message}`);
     }
 }
+
+module.exports = {
+    createUser
+};
