@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
+
 //api endpoint exposing user resources
 app.get('/api/v1/users',  async (req, res) => {
     try {
@@ -23,6 +24,11 @@ app.get('/api/v1/users',  async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
+});
+
+//home route
+app.get('/home', (req, res) => {
+    res.render('home');
 });
 
 
