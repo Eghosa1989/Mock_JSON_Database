@@ -1,11 +1,14 @@
-const express = require('express')
+const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController.js');
 const { readData } = require('../utils/file.js');
 
 
-router.use(express.json());
-router.use(express.urlencoded({ extended: true }));
+
+//home route
+router.get('/home', (req, res) => {
+    res.render('home');
+});
 
 
 //api endpoint exposing user resources
@@ -18,14 +21,10 @@ router.get('/api/v1/users',  async (req, res) => {
     }
 });
 
-//home route
-router.get('/home', (req, res) => {
-    res.render('home');
-});
 
-// router to create user
+
+//router to create a user
 router.post('/users', userController.createUser);
 
 
-
-   module.exports = router;
+module.exports = router;

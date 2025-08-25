@@ -13,6 +13,7 @@ async function createUser(req, res){
         //ternary operator
         const nextId = lastUser ? lastUser.id + 1 : 1;
 
+
         const newUser = {
             id: nextId,
             username: req.body.username,
@@ -20,13 +21,15 @@ async function createUser(req, res){
             email: req.body.email,
         };
 
+
+
         //push the data to memory object
         data.users.push(newUser);
 
+        //write to the file
+        await writeData(data);
 
-    //write to the file
-    await writeData(data);
-    res.status(201).json({ message: 'New user added', user: newUser });
+        res.redirect('/home');
 
     } catch (error) {
         return res.status(500).send(`Internal Server Error: ${error.message}`);
